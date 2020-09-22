@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 测试远程代码提交
+ */
 public class BaseController {
     @InitBinder
     public void initBinder(WebDataBinder dataBinder){
@@ -14,4 +17,6 @@ public class BaseController {
         dataBinder.registerCustomEditor(Date.class,
                 new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"),true));
     }
+
+
 }

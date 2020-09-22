@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace:配置接口的全路径 -->
+<mapper namespace="com.yk.mapper.UserMapper">
+	<select id="getUserByCodeAndPassword" resultType="user">
+		SELECT * FROM `smbms_user` u where userCode=#{code} and userPassword=#{password}
+	</select>
+	<select id="countUserPagation" resultType="int">
+		SELECT count(*)FROM `smbms_user` u
+		INNER JOIN `smbms_role` r ON u.`userRole`=r.`rid`
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="queryname!=null and queryname!=''">
+				and userName like concat('%',#{queryname},'%')
+			</if>
+			<if test="queryUserRole!=null and queryUserRole!=''">
+				and userRole=#{queryUserRole}
+			</if>
+		</trim>
+	</select>
+	<select id="pagationUser" resultType="user">
+		SELECT u.*,FLOOR(DATEDIFF(NOW(),u.`birthday`)/365) age  FROM `smbms_user` u
+		INNER JOIN `smbms_role` r ON u.`userRole`=r.`rid`
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="queryname!=null and queryname!=''">
+				and userName like concat('%',#{queryname},'%')
+			</if>
+			<if test="queryUserRole!=null and queryUserRole!=''">
+				and userRole=#{queryUserRole}
+			</if>
+		</trim>
+		limit #{startrow},#{pagesize}
+	</select>
+
+	<insert id="insertUser">
+		INSERT INTO `smbms_user`(`userCode`,`userName`,`userPassword`,`birthday`,`userRole`,idPicPath,workPicPath)
+		VALUES(#{userCode},#{userName},#{userPassword},#{birthday},#{userRole},#{idPicPath},#{workPicPath})
+	</insert>
+
+	<select id="getUserById" resultType="user">
+		select * from smbms_user where id=#{id}
+	</select>
+	<update id="updateUser">
+		update `smbms_user` set `userCode`=#{userCode},`userName`=#{userName},`userPassword`=#{userPassword},
+		birthday=#{birthday}
+		where id=#{id}
+	</update>
+    <select id="getUserByCode" resultType="user">
+        SELECT * FROM `smbms_user` u where userCode=#{code}
+    </select>
+</mapper>

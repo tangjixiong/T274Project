@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- settings:Mybatis全局配置标签,用于改变框架的行为 -->
+	<settings>
+		<setting name="logImpl" value="LOG4J" />
+		<setting name="autoMappingBehavior" value="FULL" />
+		<setting name="cacheEnabled" value="true"/>
+	</settings>
+	<!-- 自动给某个包下所有类取别名，别名为：类名小写 -->
+	<typeAliases>
+		<package name="com.yk.entity" />
+	</typeAliases>
+</configuration>
+

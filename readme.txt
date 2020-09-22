@@ -3,3 +3,5 @@ Git is free software Test Two.第三个个版本
 
 clean 干净的
 clear 清除
+
+正在开发查询功能，只做了50%。。。。。。。。。。。。。。。
